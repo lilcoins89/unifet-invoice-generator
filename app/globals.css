@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: Arial, Helvetica, sans-serif;
+  --color-background: #f5f7fa;
+  --color-foreground: #18212f;
+  --color-card: #ffffff;
+  --color-card-foreground: #18212f;
+  --color-muted: #eef1f5;
+  --color-muted-foreground: #667085;
+  --color-border: #d9dee7;
+  --color-primary: #c62828;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #f3f5f8;
+  --color-secondary-foreground: #344054;
+  --color-accent: #f0b90b;
+  --color-ring: #c62828;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+}
+
+* { box-sizing: border-box; }
+html { background: #f5f7fa; }
+body { margin: 0; background: #f5f7fa; color: #18212f; font-family: Arial, Helvetica, sans-serif; }
+button, input, textarea { font: inherit; }
+
+.invoice-paper { box-shadow: 0 20px 60px rgba(24, 33, 47, 0.12); }
+.invoice-table th, .invoice-table td { border-bottom: 1px solid #e4e7ec; }
+.invoice-table th { background: #c62828; color: #fff; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+.invoice-table td { font-size: 12px; color: #344054; }
+
+@media print {
+  body { background: #fff; }
+  .no-print { display: none !important; }
+  .print-area { display: block !important; padding: 0 !important; }
+  .invoice-paper { box-shadow: none; max-width: none !important; border: 0 !important; }
+  @page { size: A4; margin: 10mm; }
+}
