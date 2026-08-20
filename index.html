@@ -80,7 +80,6 @@
     button.secondary { background: #555; }
     button.secondary:hover { background: #333; }
 
-    /* ========== INVOICE (matches original template) ========== */
     .invoice-wrapper {
       background: #fff;
       border-radius: 6px;
@@ -91,7 +90,6 @@
     }
     .invoice { width: 100%; background: #fff; position: relative; }
 
-    /* Header */
     .header {
       display: flex;
       justify-content: space-between;
@@ -104,8 +102,8 @@
       gap: 16px;
     }
     .logo-circle {
-      width: 86px;
-      height: 86px;
+      width: 92px;
+      height: 92px;
       border: 3.5px solid #c62828;
       border-radius: 50%;
       display: flex;
@@ -115,35 +113,11 @@
       position: relative;
       background: #fff;
       flex-shrink: 0;
+      overflow: hidden;
     }
-    .logo-circle .stars {
-      position: absolute;
-      top: 10px;
-      left: 0; right: 0;
-      display: flex;
-      justify-content: space-between;
-      padding: 0 13px;
-      font-size: 9px;
-      color: #c62828;
-      line-height: 1;
-    }
-    .logo-circle .text-top {
-      font-size: 10.5px;
-      font-weight: 800;
-      color: #c62828;
-      letter-spacing: 1.2px;
-      margin-top: 2px;
-    }
-    .logo-circle .ship {
-      font-size: 26px;
-      line-height: 1;
-      margin: 1px 0;
-    }
-    .logo-circle .text-bottom {
-      font-size: 8.5px;
-      font-weight: 800;
-      color: #c62828;
-      letter-spacing: 0.8px;
+    .logo-circle svg {
+      width: 70px;
+      height: 70px;
     }
     .company-name {
       font-size: 30px;
@@ -180,7 +154,6 @@
       line-height: 1.5;
     }
 
-    /* Main table – matches original column structure */
     .invoice-table {
       width: 100%;
       border-collapse: collapse;
@@ -212,7 +185,6 @@
       line-height: 1.35;
     }
 
-    /* Bottom section */
     .bottom-section {
       display: flex;
       justify-content: space-between;
@@ -222,7 +194,7 @@
     }
     .truck-area {
       flex: 1;
-      max-width: 360px;
+      max-width: 380px;
     }
     .truck-img {
       width: 100%;
@@ -273,43 +245,22 @@
     }
     .signature {
       font-family: 'Brush Script MT', 'Segoe Script', 'Comic Sans MS', cursive;
-      font-size: 26px;
+      font-size: 28px;
       color: #c62828;
-      transform: rotate(-3deg);
+      transform: rotate(-4deg);
       font-weight: 400;
+      line-height: 1;
     }
     .stamp {
-      width: 76px;
-      height: 76px;
-      border: 3px solid #c62828;
-      border-radius: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #c62828;
-      font-size: 8.5px;
-      font-weight: 800;
-      text-align: center;
-      line-height: 1.15;
-      position: relative;
+      width: 82px;
+      height: 82px;
       flex-shrink: 0;
     }
-    .stamp .stars {
-      position: absolute;
-      top: 7px;
-      left: 0; right: 0;
-      display: flex;
-      justify-content: space-between;
-      padding: 0 9px;
-      font-size: 7.5px;
-    }
-    .stamp .ship-icon {
-      font-size: 18px;
-      margin: 1px 0;
+    .stamp svg {
+      width: 100%;
+      height: 100%;
     }
 
-    /* Print */
     @media print {
       body { background: #fff; padding: 0; }
       .form-section, h1, .btn-row, .no-print { display: none !important; }
@@ -376,17 +327,26 @@ Email: hello@reallygreatsite.com</textarea>
       </div>
     </div>
 
-    <!-- Invoice – styled to match the original UNIFET template -->
     <div class="invoice-wrapper" id="invoicePreview">
       <div class="invoice">
-        <!-- Header -->
         <div class="header">
           <div class="logo-area">
             <div class="logo-circle">
-              <div class="stars"><span>★</span><span>★</span></div>
-              <div class="text-top">UNIFET</div>
-              <div class="ship">🚢</div>
-              <div class="text-bottom">SHIPPING</div>
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <text x="18" y="22" fill="#c62828" font-size="11" font-weight="bold">★</text>
+                <text x="74" y="22" fill="#c62828" font-size="11" font-weight="bold">★</text>
+                <text x="50" y="18" text-anchor="middle" fill="#c62828" font-size="9" font-weight="800" letter-spacing="1.5" font-family="Arial, sans-serif">UNIFET</text>
+                <g fill="#c62828" transform="translate(18, 28) scale(0.64)">
+                  <path d="M10 55 L90 55 L85 70 L15 70 Z"/>
+                  <rect x="25" y="35" width="50" height="20" rx="2"/>
+                  <rect x="35" y="22" width="30" height="15" rx="1"/>
+                  <rect x="42" y="10" width="12" height="14" rx="1"/>
+                  <rect x="40" y="6" width="16" height="6" rx="1"/>
+                  <path d="M5 72 Q20 68 35 72 Q50 76 65 72 Q80 68 95 72" fill="none" stroke="#c62828" stroke-width="2.5"/>
+                  <path d="M8 78 Q25 74 42 78 Q58 82 75 78 Q90 74 100 78" fill="none" stroke="#c62828" stroke-width="2"/>
+                </g>
+                <text x="50" y="92" text-anchor="middle" fill="#c62828" font-size="8" font-weight="800" letter-spacing="1.2" font-family="Arial, sans-serif">SHIPPING</text>
+              </svg>
             </div>
             <div class="company-name">
               UNIFET
@@ -406,7 +366,6 @@ Email: hello@reallygreatsite.com</textarea>
           </div>
         </div>
 
-        <!-- Table matching original columns -->
         <table class="invoice-table">
           <thead>
             <tr>
@@ -467,28 +426,35 @@ Email: hello@reallygreatsite.com</textarea>
           </tbody>
         </table>
 
-        <!-- Bottom: truck + totals + signature/stamp -->
         <div class="bottom-section">
           <div class="truck-area">
-            <svg viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg" class="truck-img">
-              <!-- Trailer / container -->
-              <rect x="135" y="38" width="210" height="72" rx="3" fill="#c62828"/>
-              <rect x="140" y="43" width="200" height="52" fill="#e53935"/>
-              <!-- Yellow UNIFET text -->
-              <text x="240" y="80" text-anchor="middle" fill="#ffd600" font-family="Arial Black, Impact, Arial" font-size="30" font-weight="900" letter-spacing="1">UNIFET</text>
-              <!-- Cab -->
-              <rect x="35" y="48" width="105" height="62" rx="7" fill="#c62828"/>
-              <rect x="45" y="56" width="52" height="32" rx="3" fill="#1a1a2e"/>
-              <rect x="102" y="56" width="28" height="32" rx="2" fill="#1a1a2e"/>
-              <!-- Bumper / lights -->
-              <rect x="30" y="68" width="8" height="14" rx="2" fill="#ffd600"/>
-              <!-- Wheels -->
-              <circle cx="75" cy="116" r="17" fill="#222"/>
-              <circle cx="75" cy="116" r="9" fill="#666"/>
-              <circle cx="175" cy="116" r="17" fill="#222"/>
-              <circle cx="175" cy="116" r="9" fill="#666"/>
-              <circle cx="300" cy="116" r="17" fill="#222"/>
-              <circle cx="300" cy="116" r="9" fill="#666"/>
+            <svg viewBox="0 0 420 150" xmlns="http://www.w3.org/2000/svg" class="truck-img">
+              <rect x="145" y="32" width="230" height="78" rx="4" fill="#c62828"/>
+              <rect x="150" y="37" width="220" height="55" fill="#e53935"/>
+              <text x="260" y="78" text-anchor="middle" fill="#ffd600" font-family="Arial Black, Impact, Arial" font-size="32" font-weight="900" letter-spacing="1.5">UNIFET</text>
+              <line x1="155" y1="45" x2="365" y2="45" stroke="#b71c1c" stroke-width="1.5" opacity="0.4"/>
+              <line x1="155" y1="85" x2="365" y2="85" stroke="#b71c1c" stroke-width="1.5" opacity="0.4"/>
+              <path d="M40 50 L40 105 L145 105 L145 48 Q140 40 125 40 L55 40 Q40 42 40 50 Z" fill="#c62828"/>
+              <path d="M52 52 L52 82 L100 82 L100 52 Q95 48 85 48 L60 48 Q52 50 52 52 Z" fill="#1a1a2e"/>
+              <path d="M108 52 L108 82 L138 82 L138 55 Q135 50 125 50 L112 50 Q108 51 108 52 Z" fill="#1a1a2e"/>
+              <rect x="32" y="68" width="10" height="16" rx="2" fill="#ffd600"/>
+              <rect x="35" y="95" width="20" height="8" rx="1" fill="#333"/>
+              <rect x="40" y="105" width="335" height="12" fill="#1a1a2e"/>
+              <g>
+                <circle cx="75" cy="122" r="18" fill="#222"/>
+                <circle cx="75" cy="122" r="10" fill="#555"/>
+                <circle cx="75" cy="122" r="4" fill="#333"/>
+              </g>
+              <g>
+                <circle cx="180" cy="122" r="18" fill="#222"/>
+                <circle cx="180" cy="122" r="10" fill="#555"/>
+                <circle cx="180" cy="122" r="4" fill="#333"/>
+              </g>
+              <g>
+                <circle cx="320" cy="122" r="18" fill="#222"/>
+                <circle cx="320" cy="122" r="10" fill="#555"/>
+                <circle cx="320" cy="122" r="4" fill="#333"/>
+              </g>
             </svg>
           </div>
 
@@ -514,10 +480,22 @@ Email: hello@reallygreatsite.com</textarea>
             <div class="signature-stamp">
               <div class="signature">Unifet</div>
               <div class="stamp">
-                <div class="stars"><span>★</span><span>★</span></div>
-                <div>UNIFET</div>
-                <div class="ship-icon">🚢</div>
-                <div>SHIPPING</div>
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="46" fill="none" stroke="#c62828" stroke-width="3.5"/>
+                  <circle cx="50" cy="50" r="40" fill="none" stroke="#c62828" stroke-width="1"/>
+                  <text x="20" y="28" fill="#c62828" font-size="10" font-weight="bold">★</text>
+                  <text x="72" y="28" fill="#c62828" font-size="10" font-weight="bold">★</text>
+                  <text x="50" y="24" text-anchor="middle" fill="#c62828" font-size="9" font-weight="800" letter-spacing="1.5" font-family="Arial, sans-serif">UNIFET</text>
+                  <g fill="#c62828" transform="translate(28, 32) scale(0.44)">
+                    <path d="M10 55 L90 55 L85 70 L15 70 Z"/>
+                    <rect x="25" y="35" width="50" height="20" rx="2"/>
+                    <rect x="35" y="22" width="30" height="15" rx="1"/>
+                    <rect x="42" y="10" width="12" height="14" rx="1"/>
+                    <rect x="40" y="6" width="16" height="6" rx="1"/>
+                    <path d="M5 72 Q20 68 35 72 Q50 76 65 72 Q80 68 95 72" fill="none" stroke="#c62828" stroke-width="3"/>
+                  </g>
+                  <text x="50" y="90" text-anchor="middle" fill="#c62828" font-size="8" font-weight="800" letter-spacing="1.2" font-family="Arial, sans-serif">SHIPPING</text>
+                </svg>
               </div>
             </div>
           </div>
