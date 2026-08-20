@@ -5,236 +5,211 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UNIFET Shipping Invoice Generator</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: Arial, Helvetica, sans-serif;
-      background: #f0f2f5;
-      color: #333;
+      background: #e8eaed;
+      color: #222;
       padding: 20px;
+      line-height: 1.4;
     }
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    .container { max-width: 980px; margin: 0 auto; }
     h1 {
       text-align: center;
-      color: #c41e3a;
-      margin-bottom: 20px;
-      font-size: 28px;
+      color: #b71c1c;
+      margin-bottom: 18px;
+      font-size: 26px;
+      letter-spacing: 0.5px;
     }
     .form-section {
-      background: white;
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      margin-bottom: 30px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 22px 24px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      margin-bottom: 28px;
     }
     .form-section h2 {
-      color: #c41e3a;
-      margin-bottom: 16px;
-      font-size: 20px;
+      color: #b71c1c;
+      margin-bottom: 14px;
+      font-size: 18px;
     }
     .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      gap: 14px;
     }
-    .form-group {
-      display: flex;
-      flex-direction: column;
-    }
-    .form-group.full {
-      grid-column: 1 / -1;
-    }
+    .form-group { display: flex; flex-direction: column; }
+    .form-group.full { grid-column: 1 / -1; }
     label {
       font-weight: 600;
-      margin-bottom: 6px;
-      font-size: 14px;
+      margin-bottom: 5px;
+      font-size: 13px;
       color: #444;
     }
     input, textarea {
-      padding: 10px 12px;
+      padding: 9px 11px;
       border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 15px;
+      border-radius: 5px;
+      font-size: 14px;
       font-family: inherit;
     }
     input:focus, textarea:focus {
       outline: none;
-      border-color: #c41e3a;
-      box-shadow: 0 0 0 3px rgba(196,30,58,0.15);
+      border-color: #b71c1c;
+      box-shadow: 0 0 0 3px rgba(183,28,28,0.12);
     }
-    textarea {
-      min-height: 80px;
-      resize: vertical;
-    }
+    textarea { min-height: 72px; resize: vertical; }
     .btn-row {
-      margin-top: 20px;
+      margin-top: 18px;
       display: flex;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
     button {
-      background: #c41e3a;
-      color: white;
+      background: #b71c1c;
+      color: #fff;
       border: none;
-      padding: 12px 24px;
-      border-radius: 6px;
-      font-size: 15px;
+      padding: 11px 20px;
+      border-radius: 5px;
+      font-size: 14px;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.15s;
     }
-    button:hover {
-      background: #a01830;
-    }
-    button.secondary {
-      background: #555;
-    }
-    button.secondary:hover {
-      background: #333;
-    }
+    button:hover { background: #8e1515; }
+    button.secondary { background: #555; }
+    button.secondary:hover { background: #333; }
 
-    /* Invoice Preview */
+    /* ========== INVOICE (matches original template) ========== */
     .invoice-wrapper {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      overflow: hidden;
-      padding: 40px 50px;
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 3px 16px rgba(0,0,0,0.1);
+      padding: 36px 42px 32px;
       max-width: 900px;
-      margin: 0 auto;
+      margin: 0 auto 40px;
     }
-    .invoice {
-      width: 100%;
-      position: relative;
-      background: white;
-    }
+    .invoice { width: 100%; background: #fff; position: relative; }
 
     /* Header */
     .header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 30px;
+      margin-bottom: 26px;
     }
     .logo-area {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
     }
     .logo-circle {
-      width: 90px;
-      height: 90px;
-      border: 3px solid #c41e3a;
+      width: 86px;
+      height: 86px;
+      border: 3.5px solid #c62828;
       border-radius: 50%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       position: relative;
-      background: white;
-    }
-    .logo-circle .ship {
-      font-size: 28px;
-      line-height: 1;
+      background: #fff;
+      flex-shrink: 0;
     }
     .logo-circle .stars {
       position: absolute;
-      top: 12px;
-      width: 100%;
+      top: 10px;
+      left: 0; right: 0;
       display: flex;
       justify-content: space-between;
-      padding: 0 14px;
-      font-size: 10px;
-      color: #c41e3a;
+      padding: 0 13px;
+      font-size: 9px;
+      color: #c62828;
+      line-height: 1;
     }
     .logo-circle .text-top {
-      font-size: 11px;
-      font-weight: 700;
-      color: #c41e3a;
-      letter-spacing: 1px;
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #c62828;
+      letter-spacing: 1.2px;
       margin-top: 2px;
     }
+    .logo-circle .ship {
+      font-size: 26px;
+      line-height: 1;
+      margin: 1px 0;
+    }
     .logo-circle .text-bottom {
-      font-size: 9px;
-      font-weight: 700;
-      color: #c41e3a;
-      letter-spacing: 0.5px;
-      margin-top: 1px;
+      font-size: 8.5px;
+      font-weight: 800;
+      color: #c62828;
+      letter-spacing: 0.8px;
     }
     .company-name {
-      font-size: 32px;
+      font-size: 30px;
       font-weight: 800;
-      color: #c41e3a;
-      letter-spacing: 1px;
-      line-height: 1.1;
+      color: #c62828;
+      letter-spacing: 0.5px;
+      line-height: 1.05;
     }
     .company-name span {
       display: block;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
-      letter-spacing: 2px;
-      margin-top: 2px;
+      letter-spacing: 2.2px;
+      margin-top: 3px;
+      color: #c62828;
     }
     .bill-to {
       text-align: right;
-      font-size: 13px;
-      line-height: 1.5;
+      font-size: 12.5px;
+      line-height: 1.45;
       color: #333;
-      max-width: 280px;
+      max-width: 270px;
     }
     .bill-to h3 {
-      color: #c41e3a;
-      font-size: 18px;
-      margin-bottom: 6px;
+      color: #c62828;
+      font-size: 17px;
+      margin-bottom: 5px;
+      font-weight: 700;
     }
     .bill-to .meta {
       font-size: 11px;
-      color: #666;
-      margin-top: 8px;
+      color: #555;
+      margin-top: 7px;
+      line-height: 1.5;
     }
 
-    /* Table */
+    /* Main table – matches original column structure */
     .invoice-table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 25px;
-      font-size: 13px;
+      margin-bottom: 22px;
+      font-size: 12.5px;
     }
     .invoice-table thead th {
-      background: #c41e3a;
-      color: white;
-      padding: 10px 12px;
+      background: #c62828;
+      color: #fff;
+      padding: 9px 10px;
       text-align: left;
       font-weight: 600;
+      font-size: 12px;
     }
-    .invoice-table thead th:nth-child(2),
-    .invoice-table thead th:nth-child(3),
-    .invoice-table thead th:nth-child(4) {
-      text-align: center;
-    }
+    .invoice-table thead th.center { text-align: center; }
     .invoice-table tbody td {
-      padding: 9px 12px;
-      border-bottom: 1px solid #e0e0e0;
+      padding: 8px 10px;
+      border-bottom: 1px solid #e5e5e5;
       vertical-align: top;
     }
-    .invoice-table tbody td:nth-child(2),
-    .invoice-table tbody td:nth-child(3),
-    .invoice-table tbody td:nth-child(4) {
-      text-align: center;
-    }
+    .invoice-table tbody td.center { text-align: center; }
     .invoice-table tbody tr:last-child td {
-      border-bottom: 2px solid #c41e3a;
+      border-bottom: 2px solid #c62828;
     }
     .left-note {
       font-size: 11px;
       color: #555;
-      max-width: 160px;
+      max-width: 170px;
+      line-height: 1.35;
     }
 
     /* Bottom section */
@@ -242,12 +217,12 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      margin-top: 20px;
-      gap: 20px;
+      margin-top: 18px;
+      gap: 24px;
     }
     .truck-area {
       flex: 1;
-      max-width: 380px;
+      max-width: 360px;
     }
     .truck-img {
       width: 100%;
@@ -256,143 +231,126 @@
     }
     .totals-area {
       text-align: right;
-      min-width: 220px;
+      min-width: 210px;
     }
     .totals-table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 15px;
-      font-size: 14px;
+      margin-bottom: 12px;
+      font-size: 13px;
     }
     .totals-table td {
-      padding: 6px 12px;
+      padding: 5px 11px;
       border: 1px solid #ddd;
     }
     .totals-table td:first-child {
-      background: #f8f8f8;
+      background: #f7f7f7;
       font-weight: 600;
       text-align: left;
+      color: #444;
     }
     .totals-table td:last-child {
       text-align: right;
       font-weight: 700;
-      color: #c41e3a;
+      color: #c62828;
     }
     .grand-total {
-      background: #c41e3a;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 4px;
-      font-size: 16px;
+      background: #c62828;
+      color: #fff;
+      padding: 9px 14px;
+      border-radius: 3px;
+      font-size: 15px;
       font-weight: 700;
       display: inline-block;
-      margin-top: 5px;
+      margin-top: 4px;
     }
     .signature-stamp {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 20px;
-      margin-top: 15px;
+      gap: 18px;
+      margin-top: 14px;
     }
     .signature {
-      font-family: 'Brush Script MT', 'Segoe Script', cursive;
-      font-size: 28px;
-      color: #c41e3a;
-      transform: rotate(-4deg);
+      font-family: 'Brush Script MT', 'Segoe Script', 'Comic Sans MS', cursive;
+      font-size: 26px;
+      color: #c62828;
+      transform: rotate(-3deg);
+      font-weight: 400;
     }
     .stamp {
-      width: 80px;
-      height: 80px;
-      border: 3px solid #c41e3a;
+      width: 76px;
+      height: 76px;
+      border: 3px solid #c62828;
       border-radius: 50%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: #c41e3a;
-      font-size: 9px;
-      font-weight: 700;
+      color: #c62828;
+      font-size: 8.5px;
+      font-weight: 800;
       text-align: center;
-      line-height: 1.2;
+      line-height: 1.15;
       position: relative;
-    }
-    .stamp .ship-icon {
-      font-size: 20px;
-      margin: 2px 0;
+      flex-shrink: 0;
     }
     .stamp .stars {
       position: absolute;
-      top: 8px;
-      width: 100%;
+      top: 7px;
+      left: 0; right: 0;
       display: flex;
       justify-content: space-between;
-      padding: 0 10px;
-      font-size: 8px;
+      padding: 0 9px;
+      font-size: 7.5px;
+    }
+    .stamp .ship-icon {
+      font-size: 18px;
+      margin: 1px 0;
     }
 
-    /* Print styles */
+    /* Print */
     @media print {
-      body {
-        background: white;
-        padding: 0;
-      }
-      .form-section, h1, .btn-row, .no-print {
-        display: none !important;
-      }
+      body { background: #fff; padding: 0; }
+      .form-section, h1, .btn-row, .no-print { display: none !important; }
       .invoice-wrapper {
         box-shadow: none;
         border-radius: 0;
-        padding: 20px;
+        padding: 18px;
         max-width: 100%;
       }
-      .invoice {
-        page-break-inside: avoid;
-      }
+      .invoice { page-break-inside: avoid; }
     }
 
-    /* Responsive */
-    @media (max-width: 700px) {
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-      .header {
-        flex-direction: column;
-        gap: 20px;
-      }
-      .bill-to {
-        text-align: left;
-      }
-      .bottom-section {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .invoice-wrapper {
-        padding: 20px;
-      }
+    @media (max-width: 720px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .header { flex-direction: column; gap: 16px; }
+      .bill-to { text-align: left; }
+      .bottom-section { flex-direction: column; align-items: flex-start; }
+      .invoice-wrapper { padding: 20px 16px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>UNIFET Shipping Invoice Generator</h1>
+    <h1 class="no-print">UNIFET Shipping Invoice Generator</h1>
 
     <div class="form-section no-print">
       <h2>Fill Invoice Details</h2>
       <div class="form-grid">
         <div class="form-group full">
           <label for="billTo">Bill To (Name & Address)</label>
-          <textarea id="billTo" placeholder="e.g. Kholoud Omar, Bisha, King Fahd District south 67713 Saudi Arabia.&#10;Phone: +123-456-7890&#10;Email: hello@reallygreatsite.com">Kholoud Omar, Bisha, King Fahd District south 67713 Saudi Arabia.
+          <textarea id="billTo">Kholoud Omar, Bisha, King Fahd District south 67713 Saudi Arabia.
 Phone: +123-456-7890
 Email: hello@reallygreatsite.com</textarea>
         </div>
         <div class="form-group">
           <label for="securityFee">Security Fee ($)</label>
-          <input type="number" id="securityFee" step="0.01" min="0" value="31.00" placeholder="0.00">
+          <input type="number" id="securityFee" step="0.01" min="0" value="31.00">
         </div>
         <div class="form-group">
           <label for="deliveryFee">Delivery Fee ($)</label>
-          <input type="number" id="deliveryFee" step="0.01" min="0" value="5.00" placeholder="0.00">
+          <input type="number" id="deliveryFee" step="0.01" min="0" value="5.00">
         </div>
         <div class="form-group">
           <label for="invoiceDate">Invoice Date</label>
@@ -408,7 +366,7 @@ Email: hello@reallygreatsite.com</textarea>
         </div>
         <div class="form-group">
           <label for="invoiceNumber">Invoice #</label>
-          <input type="text" id="invoiceNumber" value="AWB18534781" placeholder="Invoice number">
+          <input type="text" id="invoiceNumber" value="AWB18534781">
         </div>
       </div>
       <div class="btn-row">
@@ -418,7 +376,7 @@ Email: hello@reallygreatsite.com</textarea>
       </div>
     </div>
 
-    <!-- Invoice Preview -->
+    <!-- Invoice – styled to match the original UNIFET template -->
     <div class="invoice-wrapper" id="invoicePreview">
       <div class="invoice">
         <!-- Header -->
@@ -448,15 +406,15 @@ Email: hello@reallygreatsite.com</textarea>
           </div>
         </div>
 
-        <!-- Table -->
+        <!-- Table matching original columns -->
         <table class="invoice-table">
           <thead>
             <tr>
-              <th style="width: 28%;">Invoice Date: <span id="displayTableDate">2026/05/18</span></th>
-              <th style="width: 18%;">META</th>
-              <th style="width: 18%;">PAYMENT</th>
-              <th style="width: 18%;">TOTAL</th>
-              <th style="width: 18%;">DESCRIPTION</th>
+              <th style="width:28%">Invoice Date: <span id="displayTableDate">2026/05/18</span></th>
+              <th class="center" style="width:18%">META</th>
+              <th class="center" style="width:18%">PAYMENT</th>
+              <th class="center" style="width:18%">TOTAL</th>
+              <th class="center" style="width:18%">DESCRIPTION</th>
             </tr>
           </thead>
           <tbody>
@@ -466,72 +424,71 @@ Email: hello@reallygreatsite.com</textarea>
                 Kindly request for local Account<br>
                 details to proceed with payment
               </td>
-              <td>$0.00</td>
-              <td id="displaySecurity">$31.00</td>
-              <td></td>
-              <td>Price</td>
+              <td class="center">$0.00</td>
+              <td class="center" id="displaySecurity">$31.00</td>
+              <td class="center"></td>
+              <td class="center">Price</td>
             </tr>
             <tr>
               <td>$3.20</td>
-              <td></td>
-              <td id="displayDelivery">$5.00</td>
-              <td>$5.00</td>
-              <td>Price</td>
+              <td class="center"></td>
+              <td class="center" id="displayDelivery">$5.00</td>
+              <td class="center">$5.00</td>
+              <td class="center">Price</td>
             </tr>
             <tr>
               <td>$0.21</td>
-              <td></td>
-              <td>$6.00</td>
-              <td>$3.00</td>
-              <td>Bulk Tank</td>
+              <td class="center"></td>
+              <td class="center">$6.00</td>
+              <td class="center">$3.00</td>
+              <td class="center">Bulk Tank</td>
             </tr>
             <tr>
               <td>$0.21</td>
-              <td></td>
-              <td>$61.00</td>
-              <td>$3.00</td>
-              <td>Storage</td>
+              <td class="center"></td>
+              <td class="center">$61.00</td>
+              <td class="center">$3.00</td>
+              <td class="center">Storage</td>
             </tr>
             <tr>
               <td>$0.21</td>
-              <td></td>
-              <td>$610.00</td>
-              <td>$3.00</td>
-              <td>Saudi Arabia</td>
+              <td class="center"></td>
+              <td class="center">$610.00</td>
+              <td class="center">$3.00</td>
+              <td class="center">Saudi Arabia</td>
             </tr>
             <tr>
               <td>1.015</td>
-              <td></td>
-              <td>$61.00</td>
-              <td>$2.00</td>
-              <td>Total</td>
+              <td class="center"></td>
+              <td class="center">$61.00</td>
+              <td class="center">$2.00</td>
+              <td class="center">Total</td>
             </tr>
           </tbody>
         </table>
 
-        <!-- Bottom -->
+        <!-- Bottom: truck + totals + signature/stamp -->
         <div class="bottom-section">
           <div class="truck-area">
-            <!-- Simple CSS truck illustration -->
             <svg viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg" class="truck-img">
-              <!-- Trailer -->
-              <rect x="140" y="40" width="200" height="70" rx="4" fill="#c41e3a"/>
-              <rect x="145" y="45" width="190" height="50" fill="#e63946"/>
-              <!-- UNIFET text on container -->
-              <text x="240" y="80" text-anchor="middle" fill="#ffd700" font-family="Arial Black, Arial" font-size="28" font-weight="900">UNIFET</text>
+              <!-- Trailer / container -->
+              <rect x="135" y="38" width="210" height="72" rx="3" fill="#c62828"/>
+              <rect x="140" y="43" width="200" height="52" fill="#e53935"/>
+              <!-- Yellow UNIFET text -->
+              <text x="240" y="80" text-anchor="middle" fill="#ffd600" font-family="Arial Black, Impact, Arial" font-size="30" font-weight="900" letter-spacing="1">UNIFET</text>
               <!-- Cab -->
-              <rect x="40" y="50" width="100" height="60" rx="8" fill="#c41e3a"/>
-              <rect x="50" y="58" width="50" height="30" rx="4" fill="#1a1a2e"/>
-              <rect x="105" y="58" width="25" height="30" rx="3" fill="#1a1a2e"/>
+              <rect x="35" y="48" width="105" height="62" rx="7" fill="#c62828"/>
+              <rect x="45" y="56" width="52" height="32" rx="3" fill="#1a1a2e"/>
+              <rect x="102" y="56" width="28" height="32" rx="2" fill="#1a1a2e"/>
+              <!-- Bumper / lights -->
+              <rect x="30" y="68" width="8" height="14" rx="2" fill="#ffd600"/>
               <!-- Wheels -->
-              <circle cx="80" cy="115" r="18" fill="#222"/>
-              <circle cx="80" cy="115" r="10" fill="#555"/>
-              <circle cx="180" cy="115" r="18" fill="#222"/>
-              <circle cx="180" cy="115" r="10" fill="#555"/>
-              <circle cx="300" cy="115" r="18" fill="#222"/>
-              <circle cx="300" cy="115" r="10" fill="#555"/>
-              <!-- Lights -->
-              <rect x="35" y="70" width="8" height="12" rx="2" fill="#ffd700"/>
+              <circle cx="75" cy="116" r="17" fill="#222"/>
+              <circle cx="75" cy="116" r="9" fill="#666"/>
+              <circle cx="175" cy="116" r="17" fill="#222"/>
+              <circle cx="175" cy="116" r="9" fill="#666"/>
+              <circle cx="300" cy="116" r="17" fill="#222"/>
+              <circle cx="300" cy="116" r="9" fill="#666"/>
             </svg>
           </div>
 
@@ -573,14 +530,12 @@ Email: hello@reallygreatsite.com</textarea>
     function formatDate(dateStr) {
       if (!dateStr) return '';
       const [y, m, d] = dateStr.split('-');
-      return `${y}/${m}/${d}`;
+      return y + '/' + m + '/' + d;
     }
-
     function formatMoney(val) {
       const num = parseFloat(val) || 0;
       return '$' + num.toFixed(2);
     }
-
     function generateInvoice() {
       const billTo = document.getElementById('billTo').value.trim().replace(/\n/g, '<br>');
       const security = parseFloat(document.getElementById('securityFee').value) || 0;
@@ -589,33 +544,25 @@ Email: hello@reallygreatsite.com</textarea>
       const dueDate = document.getElementById('dueDate').value;
       const time = document.getElementById('invoiceTime').value;
       const invNum = document.getElementById('invoiceNumber').value.trim();
-
       const total = security + delivery;
 
-      // Update displays
       document.getElementById('displayBillTo').innerHTML = billTo || '—';
       document.getElementById('displayInvoiceNum').textContent = invNum || '—';
       document.getElementById('displayCreateDate').textContent = formatDate(invDate);
       document.getElementById('displayDueDate').textContent = formatDate(dueDate);
       document.getElementById('displayTime').textContent = time || '—';
       document.getElementById('displayTableDate').textContent = formatDate(invDate);
-
       document.getElementById('displaySecurity').textContent = formatMoney(security);
       document.getElementById('displayDelivery').textContent = formatMoney(delivery);
-
       document.getElementById('totalSecurity').textContent = formatMoney(security);
       document.getElementById('totalDelivery').textContent = formatMoney(delivery);
       document.getElementById('grandTotalDisplay').textContent = formatMoney(total);
       document.getElementById('grandTotalBig').textContent = formatMoney(total);
 
-      // Smooth scroll to preview
       document.getElementById('invoicePreview').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-
     function resetForm() {
-      document.getElementById('billTo').value = `Kholoud Omar, Bisha, King Fahd District south 67713 Saudi Arabia.
-Phone: +123-456-7890
-Email: hello@reallygreatsite.com`;
+      document.getElementById('billTo').value = 'Kholoud Omar, Bisha, King Fahd District south 67713 Saudi Arabia.\nPhone: +123-456-7890\nEmail: hello@reallygreatsite.com';
       document.getElementById('securityFee').value = '31.00';
       document.getElementById('deliveryFee').value = '5.00';
       document.getElementById('invoiceDate').value = '2026-05-18';
@@ -624,8 +571,6 @@ Email: hello@reallygreatsite.com`;
       document.getElementById('invoiceNumber').value = 'AWB18534781';
       generateInvoice();
     }
-
-    // Initial generation
     generateInvoice();
   </script>
 </body>
